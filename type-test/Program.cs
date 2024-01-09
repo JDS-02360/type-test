@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 
 /*
 
@@ -23,6 +24,8 @@ TODO:
 
 internal class Program
 {
+    readonly static string path = GetPath();
+
     private static void TypeCheck(string sentence)
     {
         Console.ForegroundColor = ConsoleColor.White;
@@ -107,11 +110,11 @@ internal class Program
         }
     }
 
-    public static string RandomString()
+    public static string RandomString(string path)
     {
         try
         {
-            using StreamReader streamReader = new("./data.txt");
+            using StreamReader streamReader = new(path);
 
             List<string> lines = [];
 
@@ -155,7 +158,7 @@ internal class Program
 
         if (replay == "yes")
         {
-            TypeCheck(RandomString());
+            TypeCheck(RandomString(path));
         }
         else if (replay == "no")
         {
@@ -170,10 +173,27 @@ internal class Program
         }
     }
 
-    private static void Main(string[] args)
+    public static string GetPath()
+    {
+        Console.WriteLine("Enter the path to the data.txt file.");
+
+        string? path = Console.ReadLine();
+
+        if (path is not null)
+        {
+            return path;
+        }
+        else
+        {
+            // Return default path when running with dotnet run
+            return "./data.txt";
+        }
+    }
+
+    public static void Main(string[] args)
     {
         Console.Clear();
         
-        TypeCheck(RandomString());
+        TypeCheck(RandomString(path));
     }
 }

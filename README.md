@@ -4,8 +4,16 @@ A small project testing typing speed and accuracy.
 
 In need of more sentences.
 
-## Running program
+## Building & Running
 
-To run the program, use the command:
+To build the program, use the command:
 
-`dotnet run`
+```
+dotnet build
+```
+
+Then run the outputed executable. Alternatively, use the following command to both build and run the program:
+
+```
+dotnet run
+```
